@@ -1,0 +1,35 @@
+
+$st-button---background: #7D7D7D !default;
+$st-button---border: 0 !default;
+$st-button---font-size: 20px !default;
+$st-button---height: 40px !default;
+$st-button--hover---background: #A7A7A7 !default;
+$st-button__icon---margin: 8px !default;
+
+@mixin st-button(){
+	@include c-component;
+
+	height: $st-button---height;
+	border: $st-button---border;
+	background: $st-button---background;
+	font-size: $st-button---font-size;
+	overline: none;
+
+	&:hover{
+		background: $st-button--hover---background;
+	}
+
+	&__icon{
+		margin-left: $st-button__icon---margin;
+	}
+
+	&--icon-right &__icon{
+		float: right;
+		margin-left: 0px;
+		margin-right: $st-button__icon---margin;
+	}
+}
+
+.st-button{
+	@include st-button();
+}
