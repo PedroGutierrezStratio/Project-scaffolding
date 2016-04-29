@@ -26,7 +26,7 @@
             iconRight: '@'
          }
       };
-      
+
       return component;
    }
 
@@ -40,7 +40,7 @@
       /**
        * @return {Boolean}
        */
-      function isIconRight(){
+      function isIconRight() {
          return !!vm.iconRight;
       }
    }

@@ -1,7 +1,7 @@
 
 var assets = {
    js: [
-      './node_modules/jquery/dist/jquery.js',
+      //'./node_modules/jquery/dist/jquery.js',
       './node_modules/angular/angular.js',
       './node_modules/angular-animate/angular-animate.js',
       './node_modules/angular-resource/angular-resource.js',
@@ -12,7 +12,8 @@ var assets = {
 };
 
 var path = {
-   //origin files and folder
+   moduleName: 'app',
+   // origin files and folder
    origin: {
       index: 'src/index.html',
       folder: 'src/',
@@ -22,18 +23,23 @@ var path = {
       modulesSass: 'src/!(styles)/',
       favicon: 'src/favicon.ico'
    },
-   //destination files and folder
+   // destination files and folder
    dist: {
+      index: 'dist/index.html',
       folder: 'dist/',
-      buildFolder: 'dist/'
+      buildFolder: 'dist/',
+      js: 'dist/js/',
+      css: 'dist/css/',
+      resultJS: 'scripts.js',
+      resultJSVendors: 'vendors.js'
    },
+   // development files and folder
    temporary: {
       index: '.tmp/index.html',
       folder: '.tmp/',
       js: '.tmp/js/',
-      jsVendor: '.tmp/js/vendors',
+      jsVendor: '.tmp/js/vendors/',
       css: '.tmp/css/',
-      html: '.tmp/html/',
       resources: '.tmp/resources/'
    },
    //config files
@@ -53,7 +59,8 @@ var patterns = {
    allCSS: '**/*.css',
    allCSSMap: '**/*.css.map',
    allHTML: '**/*.html',
-   mainSass: 'main.scss'
+   mainSass: 'main.scss',
+   angular: '**/angular.js'
 };
 
 module.exports = {

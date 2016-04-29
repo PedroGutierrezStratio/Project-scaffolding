@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 
-//var _ = require('lodash');
+var _ = require('lodash');
 var browserSync = require('browser-sync');
 var clean = require('gulp-clean');
 var cleanCSS = require('gulp-clean-css');
@@ -63,6 +63,36 @@ gulp.task('sass', function() {
       .pipe(browserSync.stream({match: patterns.allCSS}));
 });
 
+// JS + AngularTemplateCache - Recollection, concatenation and uglify of all .js
+gulp.task('js:dist', function() {
+   var allJs = gulp.src(_getAllJsInOrder(path.temporary.js));
+   var angularTemplateCache = gulp.src([
+      path.origin.folder + patterns.allHTML,
+      '!' + path.origin.index
+   ]).pipe(templateCache({module: path.moduleName}));
+
+   return es.merge(allJs, angularTemplateCache)
+      .pipe(sourcemaps.init())
+      .pipe(concat(path.dist.resultJS))
+      .pipe(gulp.dest(path.dist.js))
+      .pipe(ngAnnotate())
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(path.dist.js));
+});
+gulp.task('js:dist:vendor', function() {
+   return gulp.src([
+         path.temporary.jsVendor + patterns.angular,
+         path.temporary.jsVendor + patterns.allJS
+      ])
+      .pipe(sourcemaps.init())
+      .pipe(concat(path.dist.resultJSVendors))
+      .pipe(gulp.dest(path.dist.js))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(path.dist.js));
+});
+
 // Clean - Remove the temporary folder and distribution folder
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
 gulp.task('clean:tmp', function() {
@@ -76,7 +106,11 @@ gulp.task('clean:dist', function() {
 
 // Copy
 gulp.task('copy:folder:dist', ['clean:dist'], function() {
-   return gulp.src(path.temporary.folder)
+   return gulp.src([
+         path.temporary.resources + patterns.all,
+         path.temporary.css + patterns.all,
+         path.temporary.index
+      ], {base: path.temporary.folder})
       .pipe(gulp.dest(path.dist.folder));
 });
 gulp.task('copy:dev', ['copy:resources', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
@@ -101,28 +135,32 @@ gulp.task('copy:index', function() {
       .pipe(gulp.dest(path.temporary.folder));
 });
 
-// Dependency injection
-gulp.task('inject:dev', function(cb) {
-   runSequence('inject:css', 'inject:dev:js', cb);
-});
-gulp.task('inject:css', function() {
+// Dependency injection - Dev
+gulp.task('inject:dev', function() {
    var cssSources = gulp.src(path.temporary.css + patterns.allCSS, {read: false});
 
-   return gulp.src(path.temporary.index)
-      .pipe(inject(cssSources, {relative: true}))
-      .pipe(gulp.dest(path.temporary.folder));
-});
-gulp.task('inject:dev:js', function() {
    var jsSources = gulp.src(_getAllJsInOrder(path.temporary.js), {read: false});
-   var vendors = gulp.src([
-      path.temporary.js + '**/angular.js',
+   var jsVendors = gulp.src([
+      path.temporary.js + patterns.angular,
       path.temporary.js + patterns.allVendorJS
    ], {read: false});
 
    return gulp.src(path.temporary.index)
       .pipe(inject(jsSources, {relative: true}))
-      .pipe(inject(vendors, {name: 'vendors', relative: true}))
+      .pipe(inject(jsVendors, {name: 'vendors', relative: true}))
+      .pipe(inject(cssSources, {relative: true}))
       .pipe(gulp.dest(path.temporary.folder));
+});
+gulp.task('inject:dist', ['copy:dev', 'sass'], function() {
+   var jsSources = gulp.src(path.dist.js + path.dist.resultJS, {read: false});
+   var jsVendors = gulp.src(path.dist.js + path.dist.resultJSVendors, {read: false});
+   var cssSources = gulp.src(path.dist.css + patterns.allCSS, {read: false});
+
+   return gulp.src(path.dist.index)
+      .pipe(inject(jsSources, {relative: true}))
+      .pipe(inject(jsVendors, {name: 'vendors', relative: true}))
+      .pipe(inject(cssSources, {relative: true}))
+      .pipe(gulp.dest(path.dist.folder));
 });
 
 // Serve
@@ -152,3 +190,14 @@ gulp.task('build:dev', function(cb) {
       'inject:dev',
    cb);
 });
+gulp.task('build', function(cb) {
+   runSequence(
+      'clean',
+      ['copy:dev', 'sass'],
+      'copy:folder:dist',
+      ['js:dist','js:dist:vendor'],
+      'inject:dist',
+   cb);
+});
+
+gulp.task('default', ['build']);

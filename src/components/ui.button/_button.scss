@@ -13,7 +13,8 @@ $st-button__icon---margin: 8px !default;
 	border: $st-button---border;
 	background: $st-button---background;
 	font-size: $st-button---font-size;
-	overline: none;
+	cursor: pointer;
+	outline: none;
 
 	&:hover{
 		background: $st-button--hover---background;
