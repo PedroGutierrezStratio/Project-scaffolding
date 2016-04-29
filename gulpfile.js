@@ -1,33 +1,33 @@
 'use strict';
 
-var gulp = require('gulp');
+const gulp = require('gulp');
 
-var _ = require('lodash');
-var browserSync = require('browser-sync');
-var clean = require('gulp-clean');
-var cleanCSS = require('gulp-clean-css');
-var concat = require('gulp-concat');
-var es = require('event-stream');
-var gulpif = require('gulp-if');
-var inject = require('gulp-inject');
-var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
-var Karma = require('karma').Server;
-var ngAnnotate = require('gulp-ng-annotate');
-var plumber = require('gulp-plumber');
-var prefix = require('gulp-autoprefixer');
-var proxyMiddleware = require('http-proxy-middleware');
-var reload = browserSync.reload;
-var runSequence = require('gulp-run-sequence');
-var sass = require('gulp-sass');
-var settings = require('./gulp.config');
-var sourcemaps = require('gulp-sourcemaps');
-var templateCache = require('gulp-angular-templatecache');
-var uglify = require('gulp-uglify');
+const babel = require('gulp-babel');
+const browserSync = require('browser-sync');
+const clean = require('gulp-clean');
+const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const es = require('event-stream');
+const gulpif = require('gulp-if');
+const inject = require('gulp-inject');
+const jscs = require('gulp-jscs');
+const jshint = require('gulp-jshint');
+const Karma = require('karma').Server;
+const ngAnnotate = require('gulp-ng-annotate');
+const plumber = require('gulp-plumber');
+const prefix = require('gulp-autoprefixer');
+const proxyMiddleware = require('http-proxy-middleware');
+const reload = browserSync.reload;
+const runSequence = require('gulp-run-sequence');
+const sass = require('gulp-sass');
+const settings = require('./gulp.config');
+const sourcemaps = require('gulp-sourcemaps');
+const templateCache = require('gulp-angular-templatecache');
+const uglify = require('gulp-uglify');
 
-var path = settings.path;
-var patterns = settings.patterns;
-var assets = settings.assets;
+const path = settings.path;
+const patterns = settings.patterns;
+const assets = settings.assets;
 
 // Complex Paths
 function _getAllJsInOrder(path) {
@@ -194,6 +194,9 @@ gulp.task('serve', function() {
    gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'copy:index', 'inject:dev', reload]);
    gulp.watch([path.origin.resources + patterns.all], ['copy:resources', reload]);
 });
+
+// Test
+gulp.task('test', ['build']);
 
 // Build
 gulp.task('build:dev', function(cb) {
