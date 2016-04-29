@@ -1,23 +1,23 @@
 (function() {
-    'use strict';
+   'use strict';
 
-    angular
-        .module('app.dashboard')
-        .controller('dashboardController', dashboardController);
+   angular
+      .module('app.dashboard')
+      .controller('DashboardController', DashboardController);
 
-    dashboardController.$inject = [];
+   DashboardController.$inject = [];
 
-    /* @ngInject */
-    function dashboardController() {
-        var vm = this;
-        vm.title = 'dashboardController';
+   /* @ngInject */
+   function DashboardController() {
+      var vm = this;
+      vm.title = 'DashboardController';
 
-        activate();
+      activate();
 
-        ////////////////
+      ////////////////
 
-        function activate() {
-        	
-        }
-    }
+      function activate() {
+         [...[1,2]].map(_=>_ * 2);
+      }
+   }
 })();

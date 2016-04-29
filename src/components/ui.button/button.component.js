@@ -1,16 +1,12 @@
 /**
- * Components collection
- * @namespace app.components
+ * Button UI component
+ *
+ * @memberOf app.components
+ * @namespace app.components.button
  */
 
 (function() {
    'use strict';
-
-   /**
-    * @description Button UI component 
-    * @namespace app.components
-    * @memberOf components
-    */
 
    angular
       .module('app.components.button', [])

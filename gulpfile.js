@@ -10,6 +10,7 @@ var concat = require('gulp-concat');
 var es = require('event-stream');
 var gulpif = require('gulp-if');
 var inject = require('gulp-inject');
+var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var Karma = require('karma').Server;
 var ngAnnotate = require('gulp-ng-annotate');
@@ -91,6 +92,15 @@ gulp.task('js:dist:vendor', function() {
       .pipe(uglify())
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(path.dist.js));
+});
+
+// JS Lint - JSCS + JSHint
+gulp.task('jslint', function() {
+   return gulp.src(path.origin.folder + patterns.allJS)
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
+      .pipe(jscs())
+      .pipe(jscs.reporter());
 });
 
 // Clean - Remove the temporary folder and distribution folder
