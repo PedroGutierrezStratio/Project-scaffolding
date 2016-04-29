@@ -78,6 +78,7 @@ gulp.task('js:dist', function() {
       .pipe(gulp.dest(path.dist.js))
       .pipe(ngAnnotate())
       .pipe(uglify())
+      .pipe(babel({presets: ['es2015']}))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(path.dist.js));
 });
@@ -130,6 +131,7 @@ gulp.task('copy:resources', function() {
 });
 gulp.task('copy:js', function() {
    return gulp.src(_getAllJsInOrder(path.origin.folder))
+      .pipe(babel({presets: ['es2015']}))
       .pipe(gulp.dest(path.temporary.js));
 });
 gulp.task('copy:js:vendor', function() {
