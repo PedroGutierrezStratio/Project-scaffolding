@@ -168,7 +168,8 @@ gulp.task('sync', function() {
    return browserSync.init(null, {
       server: path.temporary.folder,
       notify: false,
-      open: false
+      open: false,
+      port: 3000
    });
 });
 gulp.task('serve', function() {

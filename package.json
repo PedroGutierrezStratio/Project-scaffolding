@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Project scaffolding for any purpose.",
   "scripts": {
+    "dist": "gulp",
+    "serve": "gulp serve",
     "test": "gulp test"
   },
   "repository": {
