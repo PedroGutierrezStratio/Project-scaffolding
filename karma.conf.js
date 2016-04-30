@@ -22,7 +22,14 @@ module.exports = function(config) {
            sourceMap: 'inline'
          }
       },
-      reporters: ['progress',  'junit', 'coverage']
+      reporters: ['progress', 'coverage'],
+      coverageReporter: {
+         dir: path.coverage.folder,
+         reporters: [
+            { type: 'html', subdir: 'html' },
+            { type: 'lcovonly', subdir: '.', file: 'icov.info' }
+         ]
+      },
    };
 
    karmaConf.preprocessors[path.origin.folder + patterns.allModuleJS] = ['babel'];

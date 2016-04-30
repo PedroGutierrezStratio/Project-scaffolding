@@ -205,7 +205,13 @@ gulp.task('test', ['jslint'], function (done) {
       process.exit(exitCode);
    }).start();
 });
-
+gulp.task('test:watch', ['jslint'], function (done) {
+   new Karma({
+      configFile: __dirname + path.config.karma,
+      autoWatch: true,
+      singleRun: false
+   }).start();
+});
 
 // Build
 gulp.task('build:dev', function(cb) {

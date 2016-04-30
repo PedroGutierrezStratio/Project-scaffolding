@@ -5,7 +5,8 @@
   "scripts": {
     "dist": "gulp",
     "serve": "gulp serve",
-    "test": "gulp test"
+    "test": "gulp test",
+    "test:watch": "gulp test:watch"
   },
   "repository": {
     "type": "git",

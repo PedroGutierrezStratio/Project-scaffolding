@@ -45,6 +45,9 @@ var path = {
       css: '.tmp/css/',
       resources: '.tmp/resources/'
    },
+   coverage: {
+      folder: 'target/coverage'
+   },
    //config files
    config: {
       karma: '/karma.conf.js'
