@@ -196,7 +196,16 @@ gulp.task('serve', function() {
 });
 
 // Test
-gulp.task('test', ['build']);
+gulp.task('test', ['jslint'], function (done) {
+   new Karma({
+      configFile: __dirname + path.config.karma,
+      singleRun: true
+   }, function (exitCode) {
+      done();
+      process.exit(exitCode);
+   }).start();
+});
+
 
 // Build
 gulp.task('build:dev', function(cb) {

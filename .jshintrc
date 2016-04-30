@@ -7,7 +7,8 @@
    "freeze": false,
    "futurehostile": true,
    "globals": {
-      "angular": false
+      "angular": false,
+      "inject": false
    },
    "globalstrict": false,
    "latedef": "nofunc",

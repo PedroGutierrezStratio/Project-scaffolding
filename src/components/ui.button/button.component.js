@@ -34,7 +34,10 @@
       vm.isIconRight = isIconRight;
 
       /**
+       * @name  isIconRight
+       * @description check the position of the button
        * @return {Boolean}
+       * @memberOf app.components.button
        */
       function isIconRight() {
          return !!vm.iconRight;
