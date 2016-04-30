@@ -186,12 +186,12 @@ gulp.task('sync', function() {
 });
 gulp.task('serve', function() {
 
-   runSequence('build:dev', 'sync');
+   runSequence('build:dev', 'sync', 'test:watch');
 
    gulp.watch([path.origin.index], ['copy:index', 'inject:dev', reload]);
    gulp.watch([path.origin.folder + patterns.allHTML, '!' + path.origin.index], ['copy:html', reload]);
    gulp.watch([path.origin.folder + patterns.allSCSS], ['sass']);
-   gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'copy:index', 'inject:dev', reload]);
+   gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'copy:index', 'inject:dev', 'jslint', reload]);
    gulp.watch([path.origin.resources + patterns.all], ['copy:resources', reload]);
 });
 
