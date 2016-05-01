@@ -1,36 +1,52 @@
 
-$st-button---background: #7D7D7D !default;
+$st-button---background:  getColor(n3) !default;
 $st-button---border: 0 !default;
 $st-button---font-size: 20px !default;
 $st-button---height: 40px !default;
-$st-button--hover---background: #A7A7A7 !default;
+$st-button---padding: 12px !default;
+$st-button--hover---background: getColor(n4) !default;
 $st-button__icon---margin: 8px !default;
 
 @mixin st-button(){
-	@include c-component;
+   @include component;
+   @include transition;
 
-	height: $st-button---height;
-	border: $st-button---border;
-	background: $st-button---background;
-	font-size: $st-button---font-size;
-	cursor: pointer;
-	outline: none;
+   border: $st-button---border;
+   background: $st-button---background;
+   font-size: $st-button---font-size;
+   padding: 0px $st-button---padding;
+   cursor: pointer;
+   outline: none;
 
-	&:hover{
-		background: $st-button--hover---background;
-	}
+   &:hover{
+      background: $st-button--hover---background;
+   }
 
-	&__icon{
-		margin-left: $st-button__icon---margin;
-	}
+   &,
+   &__icon,
+   &__text{
+      height: $st-button---height;
+      line-height: $st-button---height;
+      display: inline-block;
+      vertical-align: middle;
+   }
 
-	&--icon-right &__icon{
-		float: right;
-		margin-left: 0px;
-		margin-right: $st-button__icon---margin;
-	}
+   &__text{
+      line-height: $st-button---height - 3px;
+   }
+
+   &__icon{
+      margin-right: $st-button__icon---margin;
+      float: left;
+   }
+
+   &--icon-right &__icon{
+      float: right;
+      margin-left: $st-button__icon---margin;
+      margin-right: 0px;
+   }
 }
 
 .st-button{
-	@include st-button();
+   @include st-button();
 }

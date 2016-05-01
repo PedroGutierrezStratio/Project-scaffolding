@@ -10,7 +10,7 @@
    function AppRoutes($stateProvider) {
       $stateProvider
          .state('dashboard', {
-            url: '/',
+            url: '/dashboard',
             controller: 'DashboardController',
             controllerAs: 'vm',
             templateUrl: 'dashboard/dashboard.html'
