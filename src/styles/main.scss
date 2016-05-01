@@ -9,9 +9,15 @@
 // Helpers
 @import './helpers/reset';
 
+// Function
+@import './functions/getColor';
+
+// Mixins
+@import './mixins/transition';
+
 // Common components
-@import './components/c.component';
+@import './components/component';
 
 
-/* inject:modules */
+/* inject:scss */
 /* endinject */
