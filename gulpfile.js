@@ -20,6 +20,7 @@ const proxyMiddleware = require('http-proxy-middleware');
 const reload = browserSync.reload;
 const runSequence = require('gulp-run-sequence');
 const sass = require('gulp-sass');
+const sassLint = require('gulp-sass-lint');
 const settings = require('./gulp.config');
 const sourcemaps = require('gulp-sourcemaps');
 const templateCache = require('gulp-angular-templatecache');
@@ -49,11 +50,11 @@ gulp.task('sass', function() {
          }
       }))
       .pipe(inject(gulp.src(path.origin.modulesSass + patterns.allSCSS, {read: false}), {
-         starttag: '/* inject:modules */',
-         endtag: '/* endinject */',
-         transform: function(filepath) {
-            return '@import ".' + filepath + '";';
-         }
+         relative: true
+      }))
+      .pipe(inject(gulp.src(assets.css, {read: false}), {
+         relative: true,
+         name: 'vendors'
       }))
       .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'compact'}))
@@ -127,11 +128,12 @@ gulp.task('copy:folder:dist', ['clean:dist'], function() {
    return gulp.src([
          path.temporary.resources + patterns.all,
          path.temporary.css + patterns.all,
+         path.temporary.fonts + patterns.all,
          path.temporary.index
       ], {base: path.temporary.folder})
       .pipe(gulp.dest(path.dist.folder));
 });
-gulp.task('copy:dev', ['copy:resources', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
+gulp.task('copy:dev', ['copy:resources', 'copy:fonts:assets', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
 gulp.task('copy:resources', function() {
    return gulp.src(path.origin.resources + patterns.all)
       .pipe(gulp.dest(path.temporary.resources));
@@ -152,6 +154,10 @@ gulp.task('copy:html', function() {
 gulp.task('copy:index', function() {
    return gulp.src(path.origin.index)
       .pipe(gulp.dest(path.temporary.folder));
+});
+gulp.task('copy:fonts:assets', function() {
+   return gulp.src(assets.fonts)
+      .pipe(gulp.dest(path.temporary.fonts));
 });
 
 // Dependency injection - Dev

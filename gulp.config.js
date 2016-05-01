@@ -10,8 +10,12 @@ var assets = {
    jsTest: [
       './node_modules/angular-mocks/angular-mocks.js'
    ],
-   css: [],
-   fonts: []
+   css: [
+      './node_modules/egeo.ui.base/src/index.scss'
+   ],
+   fonts: [
+      './node_modules/egeo.ui.base/dist/egeo/vendors/fonts/**/*.*',
+   ]
 };
 
 var path = {
@@ -43,7 +47,8 @@ var path = {
       js: '.tmp/js/',
       jsVendor: '.tmp/js/vendors/',
       css: '.tmp/css/',
-      resources: '.tmp/resources/'
+      resources: '.tmp/resources/',
+      fonts: '.tmp/fonts/'
    },
    coverage: {
       folder: 'target/coverage'
