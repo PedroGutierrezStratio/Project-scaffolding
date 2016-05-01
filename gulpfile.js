@@ -104,6 +104,13 @@ gulp.task('jslint', function() {
       .pipe(jscs.reporter());
 });
 
+// SASS Lint - scss linter
+gulp.task('sasslint', function() {
+   return gulp.src(path.origin.folder + patterns.allSCSS)
+      .pipe(sassLint())
+      .pipe(sassLint.format());
+});
+
 // Clean - Remove the temporary folder and distribution folder
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
 gulp.task('clean:tmp', function() {
