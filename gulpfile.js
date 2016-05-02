@@ -41,7 +41,7 @@ function _getAllJsInOrder(path) {
 }
 
 // SASS - Recollection of all .sass files for each module.
-gulp.task('sass', function() {
+gulp.task('sass', ['scsslint'], function() {
    return gulp.src(path.origin.baseSass + patterns.mainSass)
       .pipe(plumber({
          errorHandler: function(error) {
