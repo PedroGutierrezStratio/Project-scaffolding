@@ -1,15 +1,18 @@
 
-$st-button---background:  get-color(n3) !default;
+$st-button---background: get-color(n3) !default;
 $st-button---border: 0 !default;
 $st-button---font-size: 20px !default;
 $st-button---height: 40px !default;
 $st-button---padding: 12px !default;
 $st-button--hover---background: get-color(n4) !default;
+$st-button--slim---font-size: 18px !default;
+$st-button--slim---height: 30px !default;
 $st-button__icon---margin: 8px !default;
 
 @mixin st-button(){
    @include component;
    @include transition;
+   @include typo(text);
 
    border: $st-button---border;
    background: $st-button---background;
@@ -44,6 +47,14 @@ $st-button__icon---margin: 8px !default;
       float: right;
       margin-left: $st-button__icon---margin;
       margin-right: 0;
+   }
+
+   &--slim,
+   &--slim &__icon,
+   &--slim &__text{
+      height: $st-button--slim---height;
+      line-height: $st-button--slim---height;
+      vertical-align: top;
    }
 }
 

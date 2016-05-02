@@ -19,28 +19,32 @@
          transclude: true,
          bindings: {
             icon: '@',
-            iconRight: '@'
+            iconRight: '@',
+            variant: '@'
          }
       };
 
       return component;
    }
 
-   stButton.$inject = [];
+   stButton.$inject = ['ComponentVariant'];
    /* @ngInject */
-   function Controller() {
+   function Controller(ComponentVariant) {
       var vm = this;
 
+      var _variants = [];
+
+      vm.hasVariant = ComponentVariant.setVariant(vm.variant).hasVariant;
       vm.isIconRight = isIconRight;
 
       /**
-       * @name  isIconRight
+       * @name isIconRight
        * @description check the position of the button
        * @return {Boolean}
        * @memberOf app.components.button
        */
       function isIconRight() {
-         return !!vm.iconRight;
+         return vm.iconRight === '' || !!vm.iconRight;
       }
    }
 })();
