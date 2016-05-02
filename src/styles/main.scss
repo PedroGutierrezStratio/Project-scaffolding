@@ -7,6 +7,7 @@
 /* endinject */
 
 // Helpers
+@import './helpers/settings';
 @import './helpers/reset';
 
 // Function
@@ -16,6 +17,7 @@
 @import './mixins/transition';
 
 // Common components
+@import './components/html';
 @import './components/component';
 
 
