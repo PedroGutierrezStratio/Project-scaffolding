@@ -32,8 +32,6 @@
    function Controller(ComponentVariant) {
       var vm = this;
 
-      var _variants = [];
-
       vm.hasVariant = ComponentVariant.setVariant(vm.variant).hasVariant;
       vm.isIconRight = isIconRight;
 
