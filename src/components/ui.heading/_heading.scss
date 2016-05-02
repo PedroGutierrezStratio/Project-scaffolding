@@ -1,0 +1,35 @@
+
+$st-heading---border-bottom: 1px solid get-color(n3) !default;
+$st-heading---padding-horizontal: 12px !default;
+$st-heading---padding-bottom: 6px !default;
+$st-heading---font-size: 26px !default;
+$st-heading--big__icon---margin-right: 10px !default;
+$st-heading--big---font-size: 32px !default;
+$st-heading__icon---margin-right: 6px !default;
+
+@mixin st-heading(){
+   @include component;
+   @include typo(heading);
+
+   border-bottom: $st-heading---border-bottom;
+   padding: 0 $st-heading---padding-horizontal $st-heading---padding-bottom;
+   display: flex;
+   font-size: $st-heading---font-size;
+   justify-content: space-between;
+
+   &--big{
+      font-size: $st-heading--big---font-size;
+   }
+
+   &--big &__icon{
+      margin-right: $st-heading--big__icon---margin-right;
+   }
+
+   &__icon{
+      margin-right: $st-heading__icon---margin-right;
+   }
+}
+
+.st-heading{
+   @include st-heading();
+}
