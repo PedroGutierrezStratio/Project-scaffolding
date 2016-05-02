@@ -1,10 +1,10 @@
 
-$st-button---background:  getColor(n3) !default;
+$st-button---background:  get-color(n3) !default;
 $st-button---border: 0 !default;
 $st-button---font-size: 20px !default;
 $st-button---height: 40px !default;
 $st-button---padding: 12px !default;
-$st-button--hover---background: getColor(n4) !default;
+$st-button--hover---background: get-color(n4) !default;
 $st-button__icon---margin: 8px !default;
 
 @mixin st-button(){
@@ -14,7 +14,7 @@ $st-button__icon---margin: 8px !default;
    border: $st-button---border;
    background: $st-button---background;
    font-size: $st-button---font-size;
-   padding: 0px $st-button---padding;
+   padding: 0 $st-button---padding;
    cursor: pointer;
    outline: none;
 
@@ -43,7 +43,7 @@ $st-button__icon---margin: 8px !default;
    &--icon-right &__icon{
       float: right;
       margin-left: $st-button__icon---margin;
-      margin-right: 0px;
+      margin-right: 0;
    }
 }
 
