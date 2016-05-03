@@ -1,4 +1,3 @@
-
 describe('component: Button', () => {
 
    beforeEach(module('app.components'));

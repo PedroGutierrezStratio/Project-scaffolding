@@ -8,7 +8,6 @@ const clean = require('gulp-clean');
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const es = require('event-stream');
-const gulpif = require('gulp-if');
 const inject = require('gulp-inject');
 const jscs = require('gulp-jscs');
 const jshint = require('gulp-jshint');
@@ -71,7 +70,7 @@ gulp.task('js:dist', function() {
    var angularTemplateCache = gulp.src([
       path.origin.folder + patterns.allHTML,
       '!' + path.origin.index
-   ]).pipe(templateCache({module: path.moduleName}));
+   ]).pipe(templateCache({module: path.moduleCoreName}));
 
    return es.merge(allJs, angularTemplateCache)
       .pipe(sourcemaps.init())
@@ -209,16 +208,16 @@ gulp.task('serve', function() {
 });
 
 // Test
-gulp.task('test', ['jslint'], function (done) {
+gulp.task('test', ['jslint'], function(done) {
    new Karma({
       configFile: __dirname + path.config.karma,
       singleRun: true
-   }, function (exitCode) {
+   }, function(exitCode) {
       done();
       process.exit(exitCode);
    }).start();
 });
-gulp.task('test:watch', ['jslint'], function (done) {
+gulp.task('test:watch', ['jslint'], function() {
    new Karma({
       configFile: __dirname + path.config.karma,
       autoWatch: true,

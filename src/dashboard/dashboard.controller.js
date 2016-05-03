@@ -20,7 +20,9 @@
          var r = [0, 0, ...[1, 2]]
             .filter(_=>_ > 0)
             .map(_=>_ * 2);
-         console.log(r);
+         while (r.pop()) {
+
+         }
       }
    }
 })();

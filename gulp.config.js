@@ -20,6 +20,7 @@ var assets = {
 
 var path = {
    moduleName: 'app',
+   moduleCoreName: 'app.core',
    // origin files and folder
    origin: {
       index: 'src/index.html',

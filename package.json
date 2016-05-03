@@ -60,6 +60,7 @@
     "karma-coverage": "0.5.5",
     "karma-jasmine": "0.3.8",
     "karma-junit-reporter": "0.4.2",
+    "karma-ng-html2js-preprocessor": "^0.2.2",
     "karma-phantomjs-launcher": "1.0.0",
     "node-sass": "3.6.0",
     "phantomjs-prebuilt": "2.1.7",
