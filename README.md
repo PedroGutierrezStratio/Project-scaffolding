@@ -24,4 +24,6 @@ Run the linters and auto-watch test
 npm run test:watch
 ```
 #### Future planning
+* Mocks system
+* Configure sass-lint correctly
 * (?) Generate the font-icon from SVG files
