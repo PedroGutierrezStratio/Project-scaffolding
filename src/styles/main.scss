@@ -1,10 +1,26 @@
+@charset "UTF-8";
+
+// Settings
+@import './vendors.config/egeo.config';
+
+/* vendors:scss */
+/* endinject */
 
 // Helpers
+@import './helpers/settings';
 @import './helpers/reset';
 
+// Function
+@import './functions/getColor';
+
+// Mixins
+@import './mixins/transition';
+@import './mixins/typo';
+
 // Common components
-@import './components/c.component';
+@import './components/html';
+@import './components/component';
 
 
-/* inject:modules */
+/* inject:scss */
 /* endinject */

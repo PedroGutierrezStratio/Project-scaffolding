@@ -20,6 +20,7 @@ const proxyMiddleware = require('http-proxy-middleware');
 const reload = browserSync.reload;
 const runSequence = require('gulp-run-sequence');
 const sass = require('gulp-sass');
+const sassLint = require('gulp-sass-lint');
 const settings = require('./gulp.config');
 const sourcemaps = require('gulp-sourcemaps');
 const templateCache = require('gulp-angular-templatecache');
@@ -40,7 +41,7 @@ function _getAllJsInOrder(path) {
 }
 
 // SASS - Recollection of all .sass files for each module.
-gulp.task('sass', function() {
+gulp.task('sass', ['sasslint'], function() {
    return gulp.src(path.origin.baseSass + patterns.mainSass)
       .pipe(plumber({
          errorHandler: function(error) {
@@ -49,11 +50,11 @@ gulp.task('sass', function() {
          }
       }))
       .pipe(inject(gulp.src(path.origin.modulesSass + patterns.allSCSS, {read: false}), {
-         starttag: '/* inject:modules */',
-         endtag: '/* endinject */',
-         transform: function(filepath) {
-            return '@import ".' + filepath + '";';
-         }
+         relative: true
+      }))
+      .pipe(inject(gulp.src(assets.css, {read: false}), {
+         relative: true,
+         name: 'vendors'
       }))
       .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'compact'}))
@@ -104,6 +105,13 @@ gulp.task('jslint', function() {
       .pipe(jscs.reporter());
 });
 
+// SASS Lint - scss linter
+gulp.task('sasslint', function() {
+   return gulp.src(path.origin.folder + patterns.allSCSS)
+      .pipe(sassLint())
+      .pipe(sassLint.format());
+});
+
 // Clean - Remove the temporary folder and distribution folder
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
 gulp.task('clean:tmp', function() {
@@ -120,11 +128,12 @@ gulp.task('copy:folder:dist', ['clean:dist'], function() {
    return gulp.src([
          path.temporary.resources + patterns.all,
          path.temporary.css + patterns.all,
+         path.temporary.fonts + patterns.all,
          path.temporary.index
       ], {base: path.temporary.folder})
       .pipe(gulp.dest(path.dist.folder));
 });
-gulp.task('copy:dev', ['copy:resources', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
+gulp.task('copy:dev', ['copy:resources', 'copy:fonts:assets', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
 gulp.task('copy:resources', function() {
    return gulp.src(path.origin.resources + patterns.all)
       .pipe(gulp.dest(path.temporary.resources));
@@ -145,6 +154,10 @@ gulp.task('copy:html', function() {
 gulp.task('copy:index', function() {
    return gulp.src(path.origin.index)
       .pipe(gulp.dest(path.temporary.folder));
+});
+gulp.task('copy:fonts:assets', function() {
+   return gulp.src(assets.fonts)
+      .pipe(gulp.dest(path.temporary.fonts));
 });
 
 // Dependency injection - Dev
@@ -186,17 +199,32 @@ gulp.task('sync', function() {
 });
 gulp.task('serve', function() {
 
-   runSequence('build:dev', 'sync');
+   runSequence('build:dev', 'sync', 'test:watch');
 
    gulp.watch([path.origin.index], ['copy:index', 'inject:dev', reload]);
    gulp.watch([path.origin.folder + patterns.allHTML, '!' + path.origin.index], ['copy:html', reload]);
    gulp.watch([path.origin.folder + patterns.allSCSS], ['sass']);
-   gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'copy:index', 'inject:dev', reload]);
+   gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'copy:index', 'inject:dev', 'jslint', reload]);
    gulp.watch([path.origin.resources + patterns.all], ['copy:resources', reload]);
 });
 
 // Test
-gulp.task('test', ['build']);
+gulp.task('test', ['jslint'], function (done) {
+   new Karma({
+      configFile: __dirname + path.config.karma,
+      singleRun: true
+   }, function (exitCode) {
+      done();
+      process.exit(exitCode);
+   }).start();
+});
+gulp.task('test:watch', ['jslint'], function (done) {
+   new Karma({
+      configFile: __dirname + path.config.karma,
+      autoWatch: true,
+      singleRun: false
+   }).start();
+});
 
 // Build
 gulp.task('build:dev', function(cb) {

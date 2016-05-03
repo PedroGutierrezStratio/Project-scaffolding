@@ -18,7 +18,10 @@ Run the linters and test
 ```
 npm test
 ```
+
+Run the linters and auto-watch test
+```
+npm run test:watch
+```
 #### Future planning
-* Add Jasmine test over Karma
-* Add Egeo, fonts and fonts-icons
 * (?) Generate the font-icon from SVG files

@@ -1,0 +1,45 @@
+options:
+  formatter: stylish
+  merge-default-rules: false
+rules:
+  bem-depth: 1
+  brace-style:
+    - 1
+    - allow-single-line: false
+  class-name-format:
+    - 1
+    - convention: hyphenatedbem
+  extends-before-declarations: 1
+  extends-before-mixins: 1
+  final-newline:
+    - 1
+    - include: true
+  function-name-format: 1
+  hex-length:
+    - 1
+    - style: long
+  hex-notation:
+    - 1
+    - style: lowercase
+  id-name-format:
+    - 1
+    - convention: hyphenatedbem
+  leading-zero: 0
+  mixin-name-format: 1
+  mixins-before-declarations: 0
+  no-color-literals: 1
+  no-extends: 1
+  no-qualifying-elements: 0
+  placeholder-name-format:
+    - 1
+    - convention: hyphenatedbem
+  property-sort-order: 0
+  quotes:
+    - 1
+    - style: simples
+  variable-name-format:
+    - 1
+    - allow-leading-underscore: true
+      # example: variable-name | block---variable | block--modifier---variable | block__element---variable | block--modifier__element---variable
+      convention: ^([a-z0-9]+(-[a-z0-9]+)*|[a-z](\-?[a-z0-9]+)*((--|__)[a-z0-9](\-?[a-z0-9]+)*)*(---[a-z0-9]+(-[a-z0-9]+)*))$
+  zero-unit: 1

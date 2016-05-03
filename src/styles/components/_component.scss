@@ -1,0 +1,7 @@
+@mixin component(){
+	box-sizing: border-box;
+}
+
+.component{
+	@include component();
+}

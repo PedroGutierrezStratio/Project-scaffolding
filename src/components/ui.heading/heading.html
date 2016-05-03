@@ -1,1 +1,17 @@
-<!-- Heading template -->
+<div
+   class="st-heading"
+   ng-class="{
+      'st-heading--big': $ctrl.hasVariant('big')
+   }"
+   type="button">
+
+   <div class="st-heading__message">
+      <span
+         class="st-heading__icon"
+         ng-if="$ctrl.icon"
+         ng-class="$ctrl.icon"><!-- 
+   --></span><!-- 
+   --><span class="st-heading__text">{{$ctrl.message}}</span>
+   </div>
+   <div class="st-heading__content" ng-transclude></div>
+</div>

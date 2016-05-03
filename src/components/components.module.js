@@ -7,6 +7,8 @@
    'use strict';
 
    angular.module('app.components', [
-      'app.components.button'
+      'app.core',
+      'app.components.button',
+      'app.components.heading'
    ]);
 })();

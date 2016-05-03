@@ -7,8 +7,15 @@ var assets = {
       './node_modules/angular-resource/angular-resource.js',
       './node_modules/angular-ui-router/release/angular-ui-router.js'
    ],
-   css: [],
-   fonts: []
+   jsTest: [
+      './node_modules/angular-mocks/angular-mocks.js'
+   ],
+   css: [
+      './node_modules/egeo.ui.base/src/index.scss'
+   ],
+   fonts: [
+      './node_modules/egeo.ui.base/dist/egeo/vendors/fonts/**/*.*',
+   ]
 };
 
 var path = {
@@ -40,7 +47,11 @@ var path = {
       js: '.tmp/js/',
       jsVendor: '.tmp/js/vendors/',
       css: '.tmp/css/',
-      resources: '.tmp/resources/'
+      resources: '.tmp/resources/',
+      fonts: '.tmp/fonts/'
+   },
+   coverage: {
+      folder: 'target/coverage'
    },
    //config files
    config: {
@@ -54,6 +65,7 @@ var patterns = {
    allModuleJS: '**/*.module.js',
    allTestJS: '**/*.spec.js',
    allVendorJS: 'vendors/*.js',
+   allJSExcludeTest: '**/!(*.spec).js',
    allJSMap: '**/*.js.map',
    allSCSS: '**/*.scss',
    allCSS: '**/*.css',
