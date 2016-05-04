@@ -1,18 +1,20 @@
 
 $st-button---background: get-color(n3) !default;
+$st-button---is-upper: true !default;
+$st-button---font-family: heading !default;
 $st-button---border: 0 !default;
-$st-button---font-size: 20px !default;
+$st-button---font-size: 18px !default;
 $st-button---height: 40px !default;
 $st-button---padding: 12px !default;
 $st-button--hover---background: get-color(n4) !default;
-$st-button--slim---font-size: 18px !default;
+$st-button--slim---font-size: 16px !default;
 $st-button--slim---height: 30px !default;
 $st-button__icon---margin: 8px !default;
 
 @mixin st-button(){
    @include component;
    @include transition;
-   @include typo(text);
+   @include typo($st-button---font-family);
 
    border: $st-button---border;
    background: $st-button---background;
@@ -20,6 +22,10 @@ $st-button__icon---margin: 8px !default;
    padding: 0 $st-button---padding;
    cursor: pointer;
    outline: none;
+
+   @if ($st-button---is-upper) {
+      text-transform: uppercase;
+   }
 
    &:hover{
       background: $st-button--hover---background;
@@ -41,6 +47,7 @@ $st-button__icon---margin: 8px !default;
    &__icon{
       margin-right: $st-button__icon---margin;
       float: left;
+      font-size: 1.1em;
    }
 
    &--icon-right &__icon{
@@ -49,6 +56,10 @@ $st-button__icon---margin: 8px !default;
       margin-right: 0;
    }
 
+   &--slim{
+      font-size: $st-button--slim---font-size;
+   }
+   
    &--slim,
    &--slim &__icon,
    &--slim &__text{
