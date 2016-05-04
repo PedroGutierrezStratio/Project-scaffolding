@@ -27,9 +27,12 @@ describe('service: ComponentVariant', () => {
       var variant = 'variant test foo bar';
 
       expect(this.ComponentVariant.setVariant(variant).hasVariant()).toBeFalsy();
+      expect(this.ComponentVariant.setVariant(variant).hasVariant(' ')).toBeFalsy();
+
       expect(this.ComponentVariant.setVariant(variant).hasVariant('variant')).toBeTruthy();
       expect(this.ComponentVariant.setVariant(variant).hasVariant('test')).toBeTruthy();
       expect(this.ComponentVariant.setVariant(variant).hasVariant('foo')).toBeTruthy();
+
       expect(this.ComponentVariant.setVariant(variant).hasVariant('variant ')).toBeFalsy();
       expect(this.ComponentVariant.setVariant(variant).hasVariant('test ')).toBeFalsy();
       expect(this.ComponentVariant.setVariant(variant).hasVariant('foo ')).toBeFalsy();

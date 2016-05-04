@@ -1,4 +1,4 @@
 
 @mixin typo($font-family: text){
-
+	font-family: egeo-get-font($font-family);
 }

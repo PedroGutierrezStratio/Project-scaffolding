@@ -38,11 +38,9 @@
       vm.hasTransclude = hasTransclude;
       vm.hasVariant = ComponentVariant.setVariant(vm.variant).hasVariant;
 
-      activate();
+      vm.$onInit = $onInit;
 
-      //////////
-
-      function activate() {
+      function $onInit() {
          $transclude(clone => _hasTransclude = !!clone.length);
       }
 
