@@ -39,15 +39,20 @@ function _getAllJsInOrder(path) {
    ];
 }
 
+// Plumber configurated
+function _newPlumber() {
+   return plumber({
+      errorHandler: function(error) {
+         console.log(error.message);
+         this.emit('end');
+      }
+   });
+}
+
 // SASS - Recollection of all .sass files for each module.
 gulp.task('sass', ['sasslint'], function() {
    return gulp.src(path.origin.baseSass + patterns.mainSass)
-      .pipe(plumber({
-         errorHandler: function(error) {
-            console.log(error.message);
-            this.emit('end');
-         }
-      }))
+      .pipe(_newPlumber())
       .pipe(inject(gulp.src(path.origin.modulesSass + patterns.allSCSS, {read: false}), {
          relative: true
       }))
@@ -73,6 +78,7 @@ gulp.task('js:dist', function() {
    ]).pipe(templateCache({module: path.moduleCoreName}));
 
    return es.merge(allJs, angularTemplateCache)
+      .pipe(_newPlumber())
       .pipe(sourcemaps.init())
       .pipe(concat(path.dist.resultJS))
       .pipe(gulp.dest(path.dist.js))
