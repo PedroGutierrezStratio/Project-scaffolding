@@ -7,6 +7,7 @@ const browserSync = require('browser-sync');
 const clean = require('gulp-clean');
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
+const dom  = require('gulp-dom');
 const es = require('event-stream');
 const inject = require('gulp-inject');
 const jscs = require('gulp-jscs');
@@ -130,14 +131,25 @@ gulp.task('clean:dist', function() {
 
 // Copy
 gulp.task('copy:folder:dist', ['clean:dist'], function() {
+   gulp.run('copy:index:dist');
+
    return gulp.src([
          path.temporary.resources + patterns.all,
          path.temporary.css + patterns.all,
-         path.temporary.fonts + patterns.all,
-         path.temporary.index
+         path.temporary.fonts + patterns.all
       ], {base: path.temporary.folder})
       .pipe(gulp.dest(path.dist.folder));
 });
+// Copy index.html and adding "ng-strict-di"
+gulp.task('copy:index:dist', ['clean:dist'], function() {
+   return gulp.src([path.temporary.index], {base: path.temporary.folder})
+      .pipe(dom(function() {
+         this.querySelector('[ng-app]').setAttribute('ng-strict-di', '');
+         return this;
+      }))
+      .pipe(gulp.dest(path.dist.folder));
+});
+
 gulp.task('copy:dev', ['copy:resources', 'copy:fonts:assets', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
 gulp.task('copy:resources', function() {
    return gulp.src(path.origin.resources + patterns.all)
@@ -166,7 +178,7 @@ gulp.task('copy:fonts:assets', function() {
 });
 
 // Dependency injection - Dev
-gulp.task('inject:dev', function() {
+gulp.task('inject:dev', ['copy:index'], function() {
    var cssSources = gulp.src(path.temporary.css + patterns.allCSS, {read: false});
 
    var jsSources = gulp.src(_getAllJsInOrder(path.temporary.js), {read: false});
@@ -181,7 +193,7 @@ gulp.task('inject:dev', function() {
       .pipe(inject(cssSources, {relative: true}))
       .pipe(gulp.dest(path.temporary.folder));
 });
-gulp.task('inject:dist', ['copy:dev', 'sass'], function() {
+gulp.task('inject:dist', function() {
    var jsSources = gulp.src(path.dist.js + path.dist.resultJS, {read: false});
    var jsVendors = gulp.src(path.dist.js + path.dist.resultJSVendors, {read: false});
    var cssSources = gulp.src(path.dist.css + patterns.allCSS, {read: false});
@@ -206,10 +218,10 @@ gulp.task('serve', function() {
 
    runSequence('build:dev', 'sync', 'test:watch');
 
-   gulp.watch([path.origin.index], ['copy:index', 'inject:dev', reload]);
+   gulp.watch([path.origin.index], ['inject:dev', reload]);
    gulp.watch([path.origin.folder + patterns.allHTML, '!' + path.origin.index], ['copy:html', reload]);
    gulp.watch([path.origin.folder + patterns.allSCSS], ['sass']);
-   gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'copy:index', 'inject:dev', 'jslint', reload]);
+   gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'inject:dev', 'jslint', reload]);
    gulp.watch([path.origin.resources + patterns.all], ['copy:resources', reload]);
 });
 
