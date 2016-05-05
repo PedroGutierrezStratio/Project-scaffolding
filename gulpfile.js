@@ -84,8 +84,8 @@ gulp.task('js:dist', function() {
       .pipe(concat(path.dist.resultJS))
       .pipe(gulp.dest(path.dist.js))
       .pipe(ngAnnotate())
-      .pipe(uglify())
       .pipe(babel({presets: ['es2015']}))
+      .pipe(uglify())
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(path.dist.js));
 });
