@@ -6,6 +6,7 @@
       .service('ComponentVariant', ComponentVariant);
 
    ComponentVariant.$inject = [];
+
    /* @ngInject */
    function ComponentVariant() {
       var self = this;
@@ -26,9 +27,11 @@
             _variants = variant.split(' ');
          }
 
-         return {hasVariant: function(variant) {
-            return _variants.indexOf(variant) !== -1;
-         }};
+         return {
+            hasVariant: function(variant) {
+               return _variants.indexOf(variant) !== -1;
+            }
+         };
       }
    }
 })();
