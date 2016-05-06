@@ -5,24 +5,34 @@
       .module('app.dashboard')
       .controller('DashboardController', DashboardController);
 
-   DashboardController.$inject = [];
+   DashboardController.$inject = ['NodeService'];
 
    /* @ngInject */
-   function DashboardController() {
+   function DashboardController(NodeService) {
       var vm = this;
       vm.title = 'DashboardController';
+
+      vm.nodeList = [];
 
       activate();
 
       ////////////////
 
       function activate() {
-         var r = [0, 0, ...[1, 2]]
-            .filter(_=>_ > 0)
-            .map(_=>_ * 2);
-         while (r.pop()) {
+         _loadNodes();
+         _loadNodeById();
+      }
 
+      function _loadNodes() {
+         NodeService.getNodes()
+            .then(success);
+
+         function success(data) {
+            vm.nodeList = data;
          }
+      }
+      function _loadNodeById() {
+         NodeService.getNodeById(5).then(_ => console.log('Node: ', _));
       }
    }
 })();

@@ -2,10 +2,19 @@
 	<st-heading icon="icon-nodes" message="Nodes" variant="big">
 		<st-button icon="icon-rocket" variant="slim">Run</st-button>
 	</st-heading>
-</div>
 
-<div class="st-wrapper">
+   <div class="st-divider"></div>
+
 	<st-button icon="icon-docker">Button</st-button>
 	<st-button icon="icon-mesos" icon-right="true">Button</st-button>
 	<st-button icon="icon-hdfs" icon-right>Button</st-button>
+
+   <div class="st-divider"></div>
+
+   <st-table
+      caption="Node list"
+      heading="['Node', 'Type', 'Health']"
+      keys="['ip', 'type', 'status']"
+      content="vm.nodeList">
+   </st-table>
 </div>
