@@ -8,26 +8,26 @@ describe('component: Button', () => {
    }));
 
    it('should to have a left icon if is not defined', function() {
-      this.component = this.$componentController('stButton',
+      var component = this.$componentController('stButton',
          null,
          {}
       );
-      expect(this.component.isIconRight()).toBeFalsy();
+      expect(component.isIconRight()).toBeFalsy();
    });
 
    it('should to have a right icon if has the attribute icon-right', function() {
-      this.component = this.$componentController('stButton',
+      var component = this.$componentController('stButton',
          null,
          {iconRight: ''}
       );
-      expect(this.component.isIconRight()).toBeTruthy();
+      expect(component.isIconRight()).toBeTruthy();
    });
 
    it('should to have a right icon if is defined', function() {
-      this.component = this.$componentController('stButton',
+      var component = this.$componentController('stButton',
          null,
          {iconRight: 'true'}
       );
-      expect(this.component.isIconRight()).toBeTruthy();
+      expect(component.isIconRight()).toBeTruthy();
    });
 });
