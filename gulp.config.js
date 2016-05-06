@@ -8,6 +8,7 @@ var assets = {
       './node_modules/angular-ui-router/release/angular-ui-router.js'
    ],
    jsTest: [
+      './node_modules/babel-polyfill/dist/polyfill.js',
       './node_modules/angular-mocks/angular-mocks.js'
    ],
    css: [

@@ -9,12 +9,7 @@
 
    /* @ngInject */
    function MockInterceptorService(MockStorage) {
-      this.response = response;
       this.responseError = responseError;
-
-      function response(response) {
-         return response;
-      }
 
       function responseError(rejection) {
          if (MockStorage.hasMock(rejection.config.url, rejection.config.method)) {
