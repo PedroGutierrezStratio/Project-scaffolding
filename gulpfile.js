@@ -73,7 +73,10 @@ gulp.task('sass', ['sasslint'], function() {
 
 // JS + AngularTemplateCache - Recollection, concatenation and uglify of all .js
 gulp.task('js:dist', function() {
-   var allJs = gulp.src(_getAllJsInOrder(path.temporary.js));
+   var allJs = gulp.src([
+      ..._getAllJsInOrder(path.temporary.js),
+      ...path.dist.exclusions.js.map(_ => '!' + path.temporary.js + _)
+   ]);
    var angularTemplateCache = gulp.src([
       path.origin.folder + patterns.allHTML,
       '!' + path.origin.index

@@ -39,7 +39,12 @@ var path = {
       js: 'dist/js/',
       css: 'dist/css/',
       resultJS: 'scripts.js',
-      resultJSVendors: 'vendors.js'
+      resultJSVendors: 'vendors.js',
+      exclusions: {
+         js: [
+            'mocks/**/!(*.module).js'
+         ]
+      }
    },
    // development files and folder
    temporary: {
