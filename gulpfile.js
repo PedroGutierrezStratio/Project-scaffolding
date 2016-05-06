@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 
+const gutil = require('gulp-util');
 const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
 const clean = require('gulp-clean');
@@ -158,6 +159,11 @@ gulp.task('copy:resources', function() {
 gulp.task('copy:js', function() {
    return gulp.src(_getAllJsInOrder(path.origin.folder))
       .pipe(babel({presets: ['es2015']}))
+      .on('error', function(error) {
+         gutil.log(gutil.colors.red('[Compilation Error]'));
+         gutil.log(gutil.colors.red(error.message));
+         this.emit('end');
+      })
       .pipe(gulp.dest(path.temporary.js));
 });
 gulp.task('copy:js:vendor', function() {
