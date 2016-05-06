@@ -27,7 +27,8 @@
       return component;
    }
 
-   stButton.$inject = ['ComponentVariant'];
+   Controller.$inject = ['ComponentVariant'];
+
    /* @ngInject */
    function Controller(ComponentVariant) {
       var vm = this;

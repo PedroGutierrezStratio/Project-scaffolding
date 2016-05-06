@@ -17,7 +17,6 @@
          templateUrl: 'components/ui.heading/heading.html',
          controller: Controller,
          transclude: true,
-         replace: true,
          bindings: {
             icon: '@',
             message: '@',
@@ -28,7 +27,8 @@
       return component;
    }
 
-   stHeading.$inject = ['ComponentVariant', '$transclude'];
+   Controller.$inject = ['ComponentVariant', '$transclude'];
+
    /* @ngInject */
    function Controller(ComponentVariant, $transclude) {
       var vm = this;
