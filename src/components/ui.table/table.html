@@ -1,0 +1,35 @@
+<table class="st-table">
+   <caption class="st-table__caption">{{$ctrl.caption}}</caption>
+   <thead>
+      <tr class="st-table__head">
+         <th
+            class="st-table__head-cell st-table__cell"
+            ng-repeat="title in ::$ctrl.heading track by $index">
+
+            {{::title}}
+         </th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr
+         class="st-table__body"
+         ng-switch="$ctrl.hasKeys()"
+         ng-repeat="row in ::$ctrl.content track by $index">
+         
+         <td
+            ng-switch-when="false"
+            class="st-table__body-cell st-table__cell"
+            ng-repeat="cell in ::row track by $index">
+
+            {{::cell}}
+         </td>
+         <td
+            ng-switch-when="true"
+            class="st-table__body-cell st-table__cell"
+            ng-repeat="key in ::$ctrl.keys track by $index">
+
+            {{::row[key]}}
+         </td>
+      </tr>
+   </tbody>
+</table>

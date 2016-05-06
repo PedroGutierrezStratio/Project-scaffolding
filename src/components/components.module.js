@@ -9,6 +9,7 @@
    angular.module('app.components', [
       'app.core',
       'app.components.button',
-      'app.components.heading'
+      'app.components.heading',
+      'app.components.table'
    ]);
 })();
