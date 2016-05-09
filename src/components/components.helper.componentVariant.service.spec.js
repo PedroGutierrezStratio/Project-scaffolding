@@ -1,6 +1,6 @@
 describe('service: ComponentVariant', () => {
 
-   beforeEach(module('app.core'));
+   beforeEach(module('app.components'));
 
    beforeEach(inject(function(_ComponentVariant_) {
       this.ComponentVariant = _ComponentVariant_;
