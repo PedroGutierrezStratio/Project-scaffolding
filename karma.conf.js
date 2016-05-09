@@ -28,7 +28,8 @@ module.exports = function(config) {
          dir: path.coverage.folder,
          reporters: [
             {type: 'html', subdir: 'html'},
-            {type: 'lcovonly', subdir: '.', file: 'icov.info'}
+            {type: 'lcovonly', subdir: '.', file: 'icov.info'},
+            {type: 'json', subdir: '.'},
          ]
       },
       colors: true,
