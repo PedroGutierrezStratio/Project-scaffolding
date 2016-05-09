@@ -14,8 +14,6 @@
       function responseError(rejection) {
          if (MockStorage.hasMock(rejection.config.url, rejection.config.method)) {
             rejection.data = MockStorage.getData(rejection.config.url, rejection.config.method);
-         } else {
-            console.warn('$http error', rejection);
          }
 
          return rejection;
