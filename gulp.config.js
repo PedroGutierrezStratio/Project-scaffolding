@@ -44,7 +44,8 @@ var path = {
       resultJSVendors: 'vendors.js',
       exclusions: {
          js: [
-            'mocks/**/!(*.module).js'
+            'mocks/**/!(*.module).js',
+            '**/*.mock.js'
          ]
       }
    },
@@ -72,6 +73,7 @@ var patterns = {
    allJS: '**/*.js',
    allModuleJS: '**/*.module.js',
    allTestJS: '**/*.spec.js',
+   allMockJS: '**/*.mock.js',
    allVendorJS: 'vendors/*.js',
    allJSExcludeTest: '**/!(*.spec).js',
    allJSMap: '**/*.js.map',
