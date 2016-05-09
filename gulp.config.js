@@ -2,6 +2,7 @@
 var assets = {
    js: [
       //'./node_modules/jquery/dist/jquery.js',
+      './node_modules/babel-polyfill/dist/polyfill.js',
       './node_modules/angular/angular.js',
       './node_modules/angular-animate/angular-animate.js',
       './node_modules/angular-resource/angular-resource.js',
