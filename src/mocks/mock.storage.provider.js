@@ -53,7 +53,7 @@
          return _mockStorage.get(name) || false;
       }
       function getData(url, method) {
-         return getMock(url, method).getData(self.$get(), _prepareUrl(url));
+         return getMock(url, method).getData(_prepareUrl(url));
       }
       function _prepareUrl(url) {
          url = url.replace(API_URL, '');
@@ -71,9 +71,12 @@
       const _config = new Map();
       var _url = '';
       var _dataGenerator = false;
+      const _mockStorage = MockStorage.$get();
 
       self.setName = setName;
       self.getName = getName;
+
+      self.getMockStorage = getMockStorage;
 
       self.getData = getData;
 
@@ -101,6 +104,10 @@
       }
       function getName() {
          return _name;
+      }
+
+      function getMockStorage() {
+         return _mockStorage;
       }
 
       function getData(MockStorage, url) {

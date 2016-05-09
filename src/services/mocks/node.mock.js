@@ -2,13 +2,13 @@
    'use strict';
 
    angular
-      .module('app.mock')
-      .config(MockNode);
+      .module('app.service')
+      .config(NodeMock);
 
-   MockNode.$inject = ['MockStorageProvider'];
+   NodeMock.$inject = ['MockStorageProvider'];
 
    /* @ngInject */
-   function MockNode(MockStorageProvider) {
+   function NodeMock(MockStorageProvider) {
       var self = MockStorageProvider.getMockBase();
 
       self
@@ -18,8 +18,9 @@
          .setDataGenerator(dataGenerator)
          .storeMock();
 
-      function dataGenerator(MockStorage, url = 0) {
-         return MockStorage
+      function dataGenerator(url = 0) {
+         return self
+            .getMockStorage()
             .getMockByName('NodeList')
             .getData()
             .filter(node => ~~node.id === ~~url[1])[0];

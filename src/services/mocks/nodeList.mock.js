@@ -2,13 +2,13 @@
    'use strict';
 
    angular
-      .module('app.mock')
-      .config(MockNodeList);
+      .module('app.service')
+      .config(NodeListMock);
 
-   MockNodeList.$inject = ['MockStorageProvider'];
+   NodeListMock.$inject = ['MockStorageProvider'];
 
    /* @ngInject */
-   function MockNodeList(MockStorageProvider) {
+   function NodeListMock(MockStorageProvider) {
       var self = MockStorageProvider.getMockBase();
 
       self

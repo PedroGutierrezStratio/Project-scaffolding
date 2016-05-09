@@ -2,6 +2,7 @@
    'use strict';
 
    angular.module('app.service', [
-      'app.core'
+      'app.core',
+      'app.mock'
    ]);
 })();
