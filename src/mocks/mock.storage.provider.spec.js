@@ -50,6 +50,10 @@ describe('provider: MockStorage', () => {
       expect(this.MockStorageProvider.getMockBase() instanceof this.MockBaseAbstract).toBeTruthy();
    });
 
+   it('should return the list of all mocks', function() {
+      expect(this.MockStorage.getMocksName()).toEqual(['Test']);
+   });
+
    it('should return false when don\'t match any mock', function() {
       expect(this.MockStorage.getMock('not_exist', 'GET')).toBeFalsy();
    });

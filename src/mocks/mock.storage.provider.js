@@ -25,7 +25,8 @@
             hasMock: hasMock,
             getMock: getMock,
             getMockByName: getMockByName,
-            getData: getData
+            getData: getData,
+            getMocksName: getMocksName
          };
       }
 
@@ -37,6 +38,9 @@
          _mockStorage.set(mock.getName(), mock);
       }
 
+      function getMocksName() {
+         return [..._mockStorage.keys()];
+      }
       function hasMock(url, method) {
          return !!getMock(url, method);
       }
