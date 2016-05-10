@@ -20,7 +20,6 @@
 
       function activate() {
          _loadNodes();
-         _loadNodeById();
       }
 
       function _loadNodes() {
@@ -30,9 +29,6 @@
          function success(data) {
             vm.nodeList = data;
          }
-      }
-      function _loadNodeById() {
-         NodeService.getNodeById(5).then(_ => console.log('Node: ', _));
       }
    }
 })();
