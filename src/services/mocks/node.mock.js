@@ -18,7 +18,7 @@
          .setDataGenerator(dataGenerator)
          .storeMock();
 
-      function dataGenerator(url = 0) {
+      function dataGenerator(url = [null, 0]) {
          return self
             .getMockStorage()
             .getMockByName('NodeList')
