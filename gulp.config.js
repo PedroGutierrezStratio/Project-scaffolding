@@ -4,9 +4,11 @@ var assets = {
       //'./node_modules/jquery/dist/jquery.js',
       './node_modules/babel-polyfill/dist/polyfill.js',
       './node_modules/angular/angular.js',
+      './node_modules/angular-sanitize/angular-sanitize.js',
       './node_modules/angular-animate/angular-animate.js',
       './node_modules/angular-resource/angular-resource.js',
-      './node_modules/angular-ui-router/release/angular-ui-router.js'
+      './node_modules/angular-ui-router/release/angular-ui-router.js',
+      './node_modules/angular-translate/dist/angular-translate.js'
    ],
    jsTest: [
       './node_modules/babel-polyfill/dist/polyfill.js',
@@ -32,6 +34,7 @@ var path = {
       resources: 'src/resources/',
       baseSass: 'src/styles/',
       modulesSass: 'src/!(styles)/',
+      translationFolder: 'src/resources/langs/',
       favicon: 'src/favicon.ico'
    },
    // destination files and folder
@@ -53,6 +56,7 @@ var path = {
    // development files and folder
    temporary: {
       index: '.tmp/index.html',
+      translationFile: 'app.translation.js',
       folder: '.tmp/',
       js: '.tmp/js/',
       jsVendor: '.tmp/js/vendors/',
@@ -78,6 +82,7 @@ var patterns = {
    allVendorJS: 'vendors/*.js',
    allJSExcludeTest: '**/!(*.spec).js',
    allJSMap: '**/*.js.map',
+   allJSON: '**/*.json',
    allSCSS: '**/*.scss',
    allCSS: '**/*.css',
    allCSSMap: '**/*.css.map',

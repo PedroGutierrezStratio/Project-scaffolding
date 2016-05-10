@@ -180,7 +180,7 @@ gulp.task('copy:folder:dist', ['clean:dist'], function() {
       ], {base: path.temporary.folder})
       .pipe(gulp.dest(path.dist.folder));
 });
-// Copy index.html and adding "ng-strict-di"
+// Copy index.html and adding 'ng-strict-di'
 gulp.task('copy:index:dist', ['clean:dist'], function() {
    return gulp.src([path.temporary.index], {base: path.temporary.folder})
       .pipe(dom(function() {
@@ -190,9 +190,15 @@ gulp.task('copy:index:dist', ['clean:dist'], function() {
       .pipe(gulp.dest(path.dist.folder));
 });
 
-gulp.task('copy:dev', ['copy:resources', 'copy:fonts:assets', 'copy:index', 'copy:html', 'copy:js', 'copy:js:vendor']);
+gulp.task('copy:dev', [
+   'copy:resources', 'copy:fonts:assets', 'copy:index',
+   'copy:html', 'copy:js', 'copy:js:vendor', 'copy:translations'
+]);
 gulp.task('copy:resources', function() {
-   return gulp.src(path.origin.resources + patterns.all)
+   return gulp.src([
+         path.origin.resources + patterns.all,
+         '!' + path.origin.translationFolder + patterns.all
+      ])
       .pipe(gulp.dest(path.temporary.resources));
 });
 gulp.task('copy:js', function() {
@@ -220,6 +226,15 @@ gulp.task('copy:index', function() {
 gulp.task('copy:fonts:assets', function() {
    return gulp.src(assets.fonts)
       .pipe(gulp.dest(path.temporary.fonts));
+});
+gulp.task('copy:translations', function() {
+   return gulp.src(path.origin.translationFolder + patterns.allJSON)
+      .pipe(angularTranslate({
+         module: path.moduleCoreName,
+         filename: path.temporary.translationFile,
+         standalone: false
+      }))
+      .pipe(gulp.dest(path.temporary.js));
 });
 
 // Dependency injection - Dev
@@ -267,7 +282,7 @@ gulp.task('serve', function() {
    gulp.watch([path.origin.folder + patterns.allHTML, '!' + path.origin.index], ['copy:html', reload]);
    gulp.watch([path.origin.folder + patterns.allSCSS], ['sass']);
    gulp.watch(_getAllJsInOrder(path.origin.folder), ['copy:js', 'inject:dev', 'jslint', reload]);
-   gulp.watch([path.origin.resources + patterns.all], ['copy:resources', reload]);
+   gulp.watch([path.origin.resources + patterns.all], ['copy:resources', 'copy:translations', reload]);
 });
 
 // Test
