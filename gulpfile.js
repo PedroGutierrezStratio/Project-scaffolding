@@ -1,35 +1,71 @@
 'use strict';
 
-const gulp = require('gulp');
+const gutil = require('gulp-util'); // Necessary for require printing
 
-const gutil = require('gulp-util');
-const babel = require('gulp-babel');
-const browserSync = require('browser-sync');
-const clean = require('gulp-clean');
-const cleanCSS = require('gulp-clean-css');
-const concat = require('gulp-concat');
-const dom  = require('gulp-dom');
-const es = require('event-stream');
-const inject = require('gulp-inject');
-const jscs = require('gulp-jscs');
-const jshint = require('gulp-jshint');
-const Karma = require('karma').Server;
-const ngAnnotate = require('gulp-ng-annotate');
-const plumber = require('gulp-plumber');
-const prefix = require('gulp-autoprefixer');
-const proxyMiddleware = require('http-proxy-middleware');
+const _loadingTimer = new LoadingTimer();
+
+const gulp = _require('gulp');
+
+const angularTranslate = _require('gulp-angular-translate');
+const babel = _require('gulp-babel');
+const browserSync = _require('browser-sync');
+const clean = _require('gulp-clean');
+const cleanCSS = _require('gulp-clean-css');
+const concat = _require('gulp-concat');
+const dom  = _require('gulp-dom');
+const es = _require('event-stream');
+const inject = _require('gulp-inject');
+const jscs = _require('gulp-jscs');
+const jshint = _require('gulp-jshint');
+const Karma = _require('karma').Server;
+const ngAnnotate = _require('gulp-ng-annotate');
+const plumber = _require('gulp-plumber');
+const prefix = _require('gulp-autoprefixer');
 const reload = browserSync.reload;
-const runSequence = require('gulp-run-sequence');
-const sass = require('gulp-sass');
-const sassLint = require('gulp-sass-lint');
-const settings = require('./gulp.config');
-const sourcemaps = require('gulp-sourcemaps');
-const templateCache = require('gulp-angular-templatecache');
-const uglify = require('gulp-uglify');
+const runSequence = _require('gulp-run-sequence');
+const sass = _require('gulp-sass');
+const sassLint = _require('gulp-sass-lint');
+const settings = _require('./gulp.config');
+const sourcemaps = _require('gulp-sourcemaps');
+const templateCache = _require('gulp-angular-templatecache');
+const uglify = _require('gulp-uglify');
+
+_loadingTimer.end();
 
 const path = settings.path;
 const patterns = settings.patterns;
 const assets = settings.assets;
+
+// Loading timer
+function LoadingTimer() {
+   var startOn = Date.now();
+   var count = 0;
+
+   this.end = function() {
+      process.stdout.write(
+         '\nLoaded ' + gutil.colors.magenta(count) + ' dependencies in ' +
+         gutil.colors.blue((Date.now() - startOn) + 'ms\n\n')
+      );
+   };
+   this.plus = function() {
+      count++;
+   };
+}
+
+// Require with progress output
+function _require(module) {
+   var time = Date.now();
+   process.stdout.write(gutil.colors.red('Loading ' + module));
+   var moduleLoaded = require(module);
+   process.stdout.clearLine();
+   process.stdout.cursorTo(0);
+   process.stdout.write(
+      'Loaded ' + gutil.colors.magenta(module) + ' in ' +
+      gutil.colors.blue((Date.now() - time) + 'ms\n')
+   );
+   _loadingTimer.plus();
+   return moduleLoaded;
+}
 
 // Complex Paths
 function _getAllJsInOrder(path) {
