@@ -56,7 +56,7 @@
          return _mockStorage;
       }
 
-      function getData(url) {
+      function getData(url = []) {
          return _dataGenerator(MockStorage, url);
       }
 
@@ -106,16 +106,16 @@
             METHODS.forEach(method => _methods.add(method));
          }
          if (!_name) {
-            throw 'The mock needs a name.';
+            throw new Error('The mock needs a name.');
          }
          if (!_url) {
-            throw 'The mock ' + _name + ' needs a URL pattern.';
+            throw new Error('The mock ' + _name + ' needs a URL pattern.');
          }
          if (!_dataGenerator) {
-            throw 'The mock ' + _name + ' needs a data generator.';
+            throw new Error('The mock ' + _name + ' needs a data generator.');
          }
          if (!(_dataGenerator instanceof Function)) {
-            throw 'The mock ' + _name + ' needs a function as data generator.';
+            throw new Error('The mock ' + _name + ' needs a function as data generator.');
          }
          MockStorage.storeMock(self);
       }

@@ -77,10 +77,23 @@ describe('class: MockBaseAbstract', () => {
    });
 
    it('should set all the posibles methods if is empty', function() {
-      try{
+      try {
          this.MockInstance.storeMock();
-      }catch(e){}
+      } catch (e) {}
+
       expect(this.MockInstance.getMethods().length).toBeGreaterThan(1);
+   });
+
+   it('should throw error when try to store without any required attribute', function() {
+      expect(this.MockInstance.storeMock).toThrowError();
+      this.MockInstance.setName('Test');
+      expect(this.MockInstance.storeMock).toThrowError();
+      this.MockInstance.setUrl('test/test');
+      expect(this.MockInstance.storeMock).toThrowError();
+      this.MockInstance.setDataGenerator('string');
+      expect(this.MockInstance.storeMock).toThrowError();
+      this.MockInstance.setDataGenerator(() => {});
+      expect(this.MockInstance.storeMock).not.toThrowError();
    });
 
 });
