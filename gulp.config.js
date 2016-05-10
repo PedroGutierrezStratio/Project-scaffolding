@@ -10,7 +10,8 @@ var assets = {
    ],
    jsTest: [
       './node_modules/babel-polyfill/dist/polyfill.js',
-      './node_modules/angular-mocks/angular-mocks.js'
+      './node_modules/angular-mocks/angular-mocks.js',
+      './src/core/core.*.spec.js'
    ],
    css: [
       './node_modules/egeo.ui.base/src/index.scss'
