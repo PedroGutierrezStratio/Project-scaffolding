@@ -18,7 +18,3 @@ Run the linters and test
 ```
 npm test
 ```
-
-#### Future planning
-* Configure sass-lint correctly
-* (?) Generate the font-icon from SVG files
