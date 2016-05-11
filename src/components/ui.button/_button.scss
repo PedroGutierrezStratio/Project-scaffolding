@@ -11,7 +11,7 @@ $st-button--slim---font-size: 16px !default;
 $st-button--slim---height: 30px !default;
 $st-button__icon---margin: 8px !default;
 
-@mixin st-button(){
+@mixin st-button() {
    @include component;
    @include transition;
    @include typo($st-button---font-family);
@@ -27,48 +27,48 @@ $st-button__icon---margin: 8px !default;
       text-transform: uppercase;
    }
 
-   &:hover{
+   &:hover {
       background: $st-button--hover---background;
    }
 
    &,
    &__icon,
-   &__text{
+   &__text {
       height: $st-button---height;
       line-height: $st-button---height;
       display: inline-block;
       vertical-align: middle;
    }
 
-   &__text{
+   &__text {
       line-height: $st-button---height - 3px;
    }
 
-   &__icon{
+   &__icon {
       margin-right: $st-button__icon---margin;
       float: left;
       font-size: 1.1em;
    }
 
-   &--icon-right &__icon{
+   &--icon-right &__icon {
       float: right;
       margin-left: $st-button__icon---margin;
       margin-right: 0;
    }
 
-   &--slim{
+   &--slim {
       font-size: $st-button--slim---font-size;
    }
-   
+
    &--slim,
    &--slim &__icon,
-   &--slim &__text{
+   &--slim &__text {
       height: $st-button--slim---height;
       line-height: $st-button--slim---height;
       vertical-align: top;
    }
 }
 
-.st-button{
+.st-button {
    @include st-button();
 }

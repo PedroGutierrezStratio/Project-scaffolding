@@ -1,18 +1,18 @@
 
 $st-divider---dp: $html---dp !default;
 
-@mixin st-divider(){
+@mixin st-divider() {
    @include component;
 
    height: $st-divider---dp;
    display: block;
    clear: both;
 
-   &--half{
+   &--half {
       height: $st-divider---dp / 2;
    }
 }
 
-.st-divider{
+.st-divider {
    @include st-divider();
 }

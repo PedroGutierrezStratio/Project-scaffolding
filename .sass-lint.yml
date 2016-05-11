@@ -3,18 +3,26 @@ options:
   merge-default-rules: false
 rules:
   bem-depth: 1
+  border-zero: 1
   brace-style:
     - 1
-    - allow-single-line: false
+    - style: '1tbs'
+      allow-single-line: false
   class-name-format:
     - 1
     - convention: hyphenatedbem
+  clean-import-paths:
+    - 1
+    - leading-underscore: false
+      filename-extension: false
   extends-before-declarations: 1
   extends-before-mixins: 1
   final-newline:
     - 1
     - include: true
-  function-name-format: 1
+  function-name-format:
+    - 1
+    - convention hyphenatedbem
   hex-length:
     - 1
     - style: long
@@ -24,12 +32,33 @@ rules:
   id-name-format:
     - 1
     - convention: hyphenatedbem
-  leading-zero: 0
+  indentation:
+    - 1
+    - size: 3
+  leading-zero: 1
   mixin-name-format: 1
-  mixins-before-declarations: 0
+  mixins-before-declarations:
+    - 1
+    - exclude: ['breakpoint', 'mq']
+  no-color-keywords: 1
   no-color-literals: 1
+  #no-css-comments: 1
   no-extends: 1
-  no-qualifying-elements: 0
+  no-duplicate-properties: 1
+  no-empty-rulesets: 1
+  no-ids: 1
+  no-important: 1
+  no-invalid-hex: 1
+  no-mergeable-selectors: 1
+  no-misspelled-properties: 1
+  no-qualifying-elements:
+    - 1
+    - allow-element-with-id: true
+  no-trailing-whitespace: 1
+  no-trailing-zero: 1
+  no-url-protocols: 1
+  no-vendor-prefixes: 1
+  one-declaration-per-line: 1
   placeholder-name-format:
     - 1
     - convention: hyphenatedbem
@@ -37,6 +66,17 @@ rules:
   quotes:
     - 1
     - style: simples
+  single-line-per-selector: 1
+  space-after-bang: 1
+  space-after-colon: 1
+  space-after-comm: 1
+  space-around-operator: 1
+  space-before-bang: 1
+  space-before-brace: 1
+  space-before-colon: 1
+  space-between-parens: 1
+  trailing-semicolon: 1
+  url-quotes: 1
   variable-name-format:
     - 1
     - allow-leading-underscore: true

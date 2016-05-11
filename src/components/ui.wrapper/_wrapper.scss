@@ -1,18 +1,18 @@
 
 $st-wrapper---dp: $html---dp !default;
 
-@mixin st-wrapper(){
+@mixin st-wrapper() {
    @include component;
 
    padding: $st-divider---dp;
    display: block;
    clear: both;
 
-   &--half{
+   &--half {
       padding: $st-divider---dp / 2;
    }
 }
 
-.st-wrapper{
+.st-wrapper {
    @include st-wrapper();
 }

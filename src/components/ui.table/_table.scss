@@ -11,7 +11,7 @@ $st-table__caption---padding: 16px 24px !default;
 $st-table__cell---padding: 10px 24px !default;
 $st-table__head-cell---padding: 16px 24px !default;
 
-@mixin st-table(){
+@mixin st-table() {
    @include component;
    @include typo($st-table---font-face);
 
@@ -19,36 +19,35 @@ $st-table__head-cell---padding: 16px 24px !default;
    border-top: 0;
    font-size: $st-table---font-size;
 
-   &__caption{
+   &__caption {
       padding: $st-table__caption---padding;
       background: $st-table__caption---background;
       color: $st-table__caption---color;
    }
 
-   &__cell{
+   &__cell {
       padding: $st-table__cell---padding;
    }
 
-   &__head{
+   &__head {
       background: $st-table__body-head---background;
    }
-   &__head-cell{
+   &__head-cell {
       padding: $st-table__head-cell---padding;
    }
 
-   &__body-cell{
+   &__body-cell {
       border-top: $st-table__body-cell---border;
    }
 
-   &__body:first-child &__cell{
+   &__body:first-child &__cell {
       border-top: 0;
    }
-   &__body:nth-child(even) &__cell{
+   &__body:nth-child(even) &__cell {
       background: $st-table__body--odd---background;
    }
-
 }
 
-.st-table{
+.st-table {
    @include st-table();
 }

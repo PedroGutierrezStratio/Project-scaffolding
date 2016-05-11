@@ -8,9 +8,9 @@ $st-heading---is-upper: true !default;
 $st-heading--big__icon---margin-right: 14px !default;
 $st-heading--big---font-size: 32px !default;
 $st-heading__icon---margin-right: 10px !default;
-$st-heading__icon---font-size: 0.9em !default;
+$st-heading__icon---font-size: .9em !default;
 
-@mixin st-heading(){
+@mixin st-heading() {
    @include component;
    @include typo($st-heading---font-face);
 
@@ -25,24 +25,24 @@ $st-heading__icon---font-size: 0.9em !default;
    }
 
    &__icon,
-   &__text{
+   &__text {
       display: inline-block;
    }
 
-   &__icon{
+   &__icon {
       margin-right: $st-heading__icon---margin-right;
       font-size: $st-heading__icon---font-size;
    }
 
-   &--big{
+   &--big {
       font-size: $st-heading--big---font-size;
    }
 
-   &--big &__icon{
+   &--big &__icon {
       margin-right: $st-heading--big__icon---margin-right;
    }
 }
 
-.st-heading{
+.st-heading {
    @include st-heading();
 }
