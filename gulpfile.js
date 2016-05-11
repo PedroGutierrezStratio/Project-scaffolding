@@ -42,10 +42,13 @@ function LoadingTimer() {
    var count = 0;
 
    this.end = function() {
-      process.stdout.write(
-         '\nLoaded ' + gutil.colors.magenta(count) + ' dependencies in ' +
-         gutil.colors.blue((Date.now() - startOn) + 'ms\n\n')
-      );
+      try {
+         process.stdout.write(
+            '\nLoaded ' + (count ? gutil.colors.magenta(count) : '') +
+            ' dependencies in ' +
+            gutil.colors.blue((Date.now() - startOn) + 'ms\n\n')
+         );
+      } catch (e) {}
    };
    this.plus = function() {
       count++;
@@ -54,17 +57,21 @@ function LoadingTimer() {
 
 // Require with progress output
 function _require(module) {
-   var time = Date.now();
-   process.stdout.write(gutil.colors.red('Loading ' + module));
-   var moduleLoaded = require(module);
-   process.stdout.clearLine();
-   process.stdout.cursorTo(0);
-   process.stdout.write(
-      'Loaded ' + gutil.colors.magenta(module) + ' in ' +
-      gutil.colors.blue((Date.now() - time) + 'ms\n')
-   );
-   _loadingTimer.plus();
-   return moduleLoaded;
+   try {
+      var time = Date.now();
+      process.stdout.write(gutil.colors.red('Loading ' + module));
+      var moduleLoaded = require(module);
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      process.stdout.write(
+         'Loaded ' + gutil.colors.magenta(module) + ' in ' +
+         gutil.colors.blue((Date.now() - time) + 'ms\n')
+      );
+      _loadingTimer.plus();
+      return moduleLoaded;
+   } catch (e) {
+      return require(module);
+   }
 }
 
 // Complex Paths
@@ -286,7 +293,7 @@ gulp.task('serve', function() {
 });
 
 // Test
-gulp.task('test', ['jslint'], function(done) {
+gulp.task('test', ['jslint', 'sasslint'], function(done) {
    new Karma({
       configFile: __dirname + path.config.karma,
       singleRun: true
