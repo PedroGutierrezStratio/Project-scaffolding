@@ -14,8 +14,8 @@
       <tr
          class="st-table__body"
          ng-switch="$ctrl.hasKeys()"
-         ng-repeat="row in ::$ctrl.content track by $index">
-         
+         ng-repeat="row in $ctrl.content track by $index">
+
          <td
             ng-switch-when="false"
             class="st-table__body-cell st-table__cell"
